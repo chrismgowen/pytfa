@@ -35,11 +35,11 @@ COPY ./utils /utils
 
 RUN chmod u+x /utils/*.sh
 
-# Install CPLEX
-RUN /utils/install_cplex.sh
-# Install gurobi
-COPY ./utils/gurobi.lic* ./
-RUN /utils/install_gurobi.sh
+# # Install CPLEX
+# RUN /utils/install_cplex.sh
+# # Install gurobi
+# COPY ./utils/gurobi.lic* ./
+# RUN /utils/install_gurobi.sh
 
 # Remove installers
 RUN rm -rf /solvers
@@ -56,13 +56,13 @@ RUN chown "$USER" "$HOME/.bashrc"
 
 #Finalizing installation
 
-RUN chmod +x /utils/activate_gurobi.sh 
+# RUN chmod +x /utils/activate_gurobi.sh 
 
 USER $USER
 RUN mkdir ./work
 
 # Activation of necessary licenses
-RUN /utils/activate_gurobi.sh
+# RUN /utils/activate_gurobi.sh
 
 # Load your package in development mode on startup
 ENTRYPOINT ["/bin/bash", "-c", "pip install --user -e /src/pytfa && $0 $*"]
